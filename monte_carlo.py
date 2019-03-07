@@ -3,7 +3,7 @@ import scipy.stats as st
 import statistics
 
 
-class RandomVariable:
+class Norm:
     """
     Creates a random input variable which follows a normal distribution
     Either supply 90% confidence bounds or a mean and standard deviation
