@@ -14,6 +14,10 @@ class TestMonteCarlo(unittest.TestCase):
         with self.assertRaises(Exception):
             a = mc.Norm(mean=0, interval=(0, 1))
 
+        # Bad combination of inputs
+        with self.assertRaises(Exception):
+            a = mc.Norm(mean=0, sd=1, interval=(0, 1))
+
         # Three number interval
         with self.assertRaises(Exception):
             a = mc.Norm(interval=(0, 1, 2))
