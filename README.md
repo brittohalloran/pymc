@@ -1,6 +1,6 @@
 A python library for running Monte-Carlo analyses
 
-```
+```python
 import monte_carlo as mc
 
 # Random variable given 90% confidence interval (default)
