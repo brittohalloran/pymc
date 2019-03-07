@@ -14,14 +14,14 @@ class RandomVariable:
         mean: float = None,
         sd: float = None,
         interval: tuple = None,
-        interval_proportion: float = 0.90,
+        proportion: float = 0.90,
     ):
         if interval != None and mean == None and sd == None:
             if len(interval) != 2:
                 raise Exception("Interval should be a 2-tuple.")
             self.mean = statistics.mean(interval)
             rng = max(interval) - min(interval)
-            z = st.norm.ppf(1 - (1 - interval_proportion) / 2)
+            z = st.norm.ppf(1 - (1 - proportion) / 2)
             self.sd = rng / (2 * z)
         elif mean != None and sd != None and interval == None:
             self.mean = mean
