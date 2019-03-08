@@ -1,5 +1,7 @@
 A python library for running Monte-Carlo analyses
 
+## Usage
+
 ```python
 import monte_carlo as mc
 
@@ -9,7 +11,7 @@ c = mc.Norm(mean=0, sd=1)
 d = mc.Binom(p=0.75) # 75% chance of 1, 25% chance of 0
 print(c.s) # single sample
 
-# Make a stackup function
+# Make a stackup function that returns a single sample
 def stackup():
     return a.s + b.s - c.s + 10 * d.s
 
