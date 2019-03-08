@@ -5,6 +5,7 @@ A python library for running Monte-Carlo analyses
 ```python
 import monte_carlo as mc
 
+# Make some input random variables
 a = mc.Norm(interval=(5, 10)) # 90% confidence interval
 b = mc.Norm(interval=(5, 10), proportion = 0.95) # 95% CI
 c = mc.Norm(mean=0, sd=1)
