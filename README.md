@@ -12,9 +12,8 @@ c = mc.Norm(mean=0, sd=1)
 d = mc.Binom(p=0.75) # 75% chance of 1, 25% chance of 0
 print(c.s) # single sample
 
-# Make a stackup function that returns a single sample
-def stackup():
-    return a.s + b.s - c.s + 10 * d.s
+# Make a function that returns a single sample
+stackup = lambda: a.s + b.s - c.s + 10 * d.s
 
 sim = mc.Simulation(f=stackup)
 sim.run()
