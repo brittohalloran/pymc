@@ -66,3 +66,16 @@ class Norm:
     def s(self) -> float:
         return np.random.normal(loc=self.mean, scale=self.sd)
 
+
+class Binom:
+    """
+    Creates a random binomial variable which outputs 1 or 0. Probability p is
+    the probability of getting 1. 
+    """
+
+    def __init__(self, p=0.5):
+        self.p = p
+
+    @property
+    def s(self) -> float:
+        return np.random.binomial(n=1, p=self.p)
