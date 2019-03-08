@@ -3,15 +3,16 @@ A python library for running Monte-Carlo analyses
 ```python
 import monte_carlo as mc
 
-# Random variable given 90% confidence interval (default)
-a = mc.RandomVariable(interval=(5, 10))
+a = mc.Norm(interval=(5, 10)) # 90% confidence interval
+b = mc.Norm(interval=(5, 10), proportion = 0.95) # 95% CI
+c = mc.Norm(mean=0, sd=1)
+print(c.s) # single sample
 
-# Random variable given 95% confidence interval (default)
-b = mc.RandomVariable(interval=(5, 10), proportion = 0.95)
+# Make a stackup function
+def stackup():
+    return a.s + b.s - (2 * c.s)
 
-# Specify mean and standard deviation
-c = mc.RandomVariable(mean=0, sd=1)
+sim = mc.Simulation(f=stackup)
+sim.run()
 
-# Get a sample
-c.sample()
 ```

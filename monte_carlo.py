@@ -1,6 +1,37 @@
 import numpy as np
 import scipy.stats as st
 import statistics
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+sns.set()
+
+
+class Simulation:
+    """
+    Creates a Monte Carlo simulation object which takes in a sampling function 
+    f and can be run. 
+    """
+
+    def __init__(self, f, n=20000):
+        self.f = f
+        self.n = n
+
+    @property
+    def s(self) -> float:
+        return self.f()
+
+    def run(self, plot=True):
+        s = []
+        for _ in range(self.n):
+            s.append(self.f())
+
+        print("{} simulations completed...".format(self.n))
+        print("Mean: ", statistics.mean(s))
+        print("St. dev: ", statistics.stdev(s))
+        if plot:
+            sns.distplot(s, kde=False, norm_hist=True)
+            plt.show()
 
 
 class Norm:
@@ -31,6 +62,7 @@ class Norm:
                 "Either supply interval endpoints or mean and sd, but not both."
             )
 
-    def sample(self) -> float:
+    @property
+    def s(self) -> float:
         return np.random.normal(loc=self.mean, scale=self.sd)
 
