@@ -1,6 +1,7 @@
+import statistics
+
 import numpy as np
 import scipy.stats as st
-import statistics
 import seaborn as sns
 import matplotlib.pyplot as plt
 
