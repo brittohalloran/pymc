@@ -1,4 +1,5 @@
 import statistics
+import time
 
 import numpy as np
 import scipy.stats as st
@@ -23,13 +24,15 @@ class Simulation:
         return self.f()
 
     def run(self, plot=True):
+        start_time = time.time()
         s = []
         for _ in range(self.n):
             s.append(self.f())
 
-        print("{} simulations completed...".format(self.n))
-        print("Mean    : {:8.4f}".format(statistics.mean(s)))
-        print("St. dev : {:8.4f}".format(statistics.stdev(s)))
+        end_time = time.time()
+        print(f"{self.n:,} simulations completed in {end_time - start_time:.1f} s")
+        print(f"Mean    : {statistics.mean(s):8,.4f}")
+        print(f"St. dev : {statistics.stdev(s):8,.4f}")
         print("")
         print("Percentiles:")
         print(f"5%  : {np.percentile(s, 5):,.4f}")
