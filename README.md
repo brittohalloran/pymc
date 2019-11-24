@@ -21,3 +21,20 @@ sim.run()
 ```
 
 ![example_plot](plot.png)
+
+## Retirement simulation
+```python
+import monte_carlo as mc
+
+sim = mc.RetirementSimulation(
+    start_date=...,
+    start_balance=...,
+    monthly_savings=...,
+    withdrawls={
+        "2030-01-01": 80000  # College tuition payout
+    },
+    retirement_date=...,
+)
+sim.run()
+
+```

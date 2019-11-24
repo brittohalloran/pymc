@@ -13,6 +13,10 @@ class Simulation:
     """
     Creates a Monte Carlo simulation object which takes in a sampling function 
     f and can be run. 
+
+    Args:
+        f (function): A function which returns a single sample
+        n (int): The number of simulation runs (default: 20000)
     """
 
     def __init__(self, f, n=20000):
@@ -48,10 +52,67 @@ class Simulation:
             plt.show()
 
 
+class RetirementSimulation:
+    """
+    Simulate retirement savings and print percentile outcomes
+
+    Args:
+        start_date (str): An ISO string (YYYY-MM-DD)
+        start_balance (int): Starting balance
+        monthly_savings (int): Savings per month
+        withdrawls (dict): A dict with date keys and withdrawl amount int values
+        retirement_date (str): An ISO string (YYYY-MM-DD)
+    """
+
+    def __init__(
+        self, start_date, start_balance, monthly_savings, withdrawls, retirement_date
+    ):
+
+        self.start_date = start_date
+        self.start_balance = start_balance
+        self.monthly_savings = monthly_savings
+        self.retirement_date = retirement_date
+        self.withdrawls = withdrawls
+
+    def add_month(self, iso_date):
+        y, m, _ = [int(x) for x in iso_date.split("-")]
+        if m == 12:
+            return f"{y+1}-{1:02}-01"
+        else:
+            return f"{y}-{m+1:02}-01"
+
+    def run(self):
+
+        # Based on S&P 500 monthly returns 1989-2019
+        monthly_return = Norm(mean=1.007, sd=0.041)
+
+        def savings_sim():
+            dt = self.start_date
+            bal = self.start_balance
+            while dt <= self.retirement_date:
+                bal = (
+                    bal * monthly_return.s
+                    + self.monthly_savings
+                    - self.withdrawls.get(dt, 0)
+                )
+                dt = self.add_month(dt)
+
+            return bal
+
+        sim = Simulation(savings_sim)
+        sim.run(plot=False)
+
+
 class Norm:
     """
     Creates a random input variable which follows a normal distribution
     Either supply 90% confidence bounds or a mean and standard deviation
+
+    Args:
+        mean (float): Distribution mean
+        sd (float): Distribution standard deviation
+        interval (tuple): Tuple of floats representing the lower and upper interval
+        proportion (float): Proportion corresponding to the interval (default: 0.90)
     """
 
     def __init__(
@@ -84,7 +145,10 @@ class Norm:
 class Binom:
     """
     Creates a random binomial variable which outputs 1 or 0. Probability p is
-    the probability of getting 1. 
+    the probability of getting 1. Default is p = 0.5 (fair coin flip).
+
+    Args:
+        p (float): The probability of getting 1 (default: 0.5)
     """
 
     def __init__(self, p=0.5):
