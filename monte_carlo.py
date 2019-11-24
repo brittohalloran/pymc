@@ -30,11 +30,16 @@ class Simulation:
         print("{} simulations completed...".format(self.n))
         print("Mean    : {:8.4f}".format(statistics.mean(s)))
         print("St. dev : {:8.4f}".format(statistics.stdev(s)))
-        print(
-            "90% confidence interval: {:8.4f} to {:8.4f}".format(
-                np.percentile(s, 5), np.percentile(s, 95)
-            )
-        )
+        print("")
+        print("Percentiles:")
+        print(f"5%  : {np.percentile(s, 5):,.4f}")
+        print(f"10% : {np.percentile(s, 10):,.4f}")
+        print(f"25% : {np.percentile(s, 25):,.4f}")
+        print(f"50% : {np.percentile(s, 50):,.4f}")
+        print(f"75% : {np.percentile(s, 75):,.4f}")
+        print(f"90% : {np.percentile(s, 90):,.4f}")
+        print(f"95% : {np.percentile(s, 95):,.4f}")
+
         if plot:
             sns.distplot(s, kde=False, norm_hist=True)
             plt.show()
