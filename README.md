@@ -28,8 +28,8 @@ import monte_carlo as mc
 
 sim = mc.RetirementSimulation(
     start_date="2019-11-01",
-    start_balance=...,
-    monthly_savings=...,
+    start_balance=1000,
+    monthly_savings=500,
     withdrawls={
         "2030-01-01": 80000  # All dates must be first of month
     },

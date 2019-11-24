@@ -65,7 +65,7 @@ class RetirementSimulation:
     """
 
     def __init__(
-        self, start_date, start_balance, monthly_savings, withdrawls, retirement_date
+        self, start_date, start_balance, monthly_savings, retirement_date, withdrawls={}
     ):
 
         self.start_date = start_date
