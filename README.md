@@ -27,13 +27,13 @@ sim.run()
 import monte_carlo as mc
 
 sim = mc.RetirementSimulation(
-    start_date=...,
+    start_date="2019-11-01",
     start_balance=...,
     monthly_savings=...,
     withdrawls={
-        "2030-01-01": 80000  # College tuition payout
+        "2030-01-01": 80000  # All dates must be first of month
     },
-    retirement_date=...,
+    retirement_date="2051-01-01",
 )
 sim.run()
 
